@@ -1,5 +1,5 @@
 # Flask Crud with JWT
-### About the project
+### 📚 About the project
 
 > This project its a simple examble using flask to create a CRUD and authorize sessions utilizing JWT for that.
 
