@@ -1,5 +1,37 @@
 # Flask Crud with JWT
 ### 📚 About the project
+### Structure
+
+```bash
+.
+├── src  (MAIN PACKAGE)
+│   ├── app.py
+│   ├── database
+│   │   └── users_db.py
+│   ├── extensions
+│   │   ├── bleuprints.py
+│   │   ├── commands.py
+│   │   ├── configuration.py
+│   │   └── database.py
+│   ├── models  (DATABASE MODELS)
+│   │   └── user_model.py
+│   ├── routes
+│   │   ├── auth_route.py
+│   │   └── user_route.py
+│   ├── schemas  (SERIALIZER SCHEMAS)
+│   │   └── user_schema.py
+│   ├── services
+│   │   ├── auth_service.py
+│   │   └── user_service.py
+│   └── utils
+│   │   ├── auth_util.py
+│   │   └── responses_util.py
+├── tests  (TESTS)
+│   └── __init__.py
+├── README.md
+├── requirements.txt
+└── settings.toml  (SETTINGS)
+```
 
 > This project its a simple examble using flask to create a CRUD and authorize sessions utilizing JWT for that.
 
@@ -48,4 +80,3 @@ To run:
 ```
 flask run
 ```
-
