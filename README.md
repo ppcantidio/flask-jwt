@@ -27,7 +27,7 @@ This project still in development, here some tasks that im working:
 ## 🚀 Getting Started
 To install the project follow this steps:
 
-####Windows:
+#### Windows
 First we need to clone the project:
 ```
 git clone https://github.com/ppcantidio/flask-jwt
