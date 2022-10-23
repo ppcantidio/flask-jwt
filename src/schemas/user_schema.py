@@ -1,14 +1,17 @@
-from marshmallow import Schema, fields
+from marshmallow import EXCLUDE, Schema, fields
 
 
 class BaseUser(Schema):
-    name = fields.str()
-    email = fields.str()
+    username = fields.Str()
+    email = fields.Str()
+
+    class Meta:
+        unknow = EXCLUDE
 
 
 class UserCreateSchema(BaseUser):
-    password = fields.str()
+    password = fields.Str()
 
 
 class UserOutSchema(BaseUser):
-    id = fields.int()
+    id = fields.Int()

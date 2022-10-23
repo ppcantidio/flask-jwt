@@ -1,5 +1,5 @@
+from src.database.models import User as UserTable
 from src.extensions.database import db
-from src.models.user_model import User as UserTable
 
 
 class UserDB:
@@ -7,11 +7,11 @@ class UserDB:
         pass
 
     def get_user_by_id(self, user_id: str):
-        pass
+        user = db.session.query(UserTable).get(user_id)
+        return user
 
     def register_user(self, user: dict):
-        user_object = UserTable(user)
-        db.add(user_object)
-        db.commit()
-        db.refresh(user_object)
-        return user_object
+        user_object = UserTable(**user)
+        db.session.add(user_object)
+        db.session.commit()
+        db.session.refresh(user_object)

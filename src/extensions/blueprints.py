@@ -1,5 +1,5 @@
-from routes.user_route import user_route
-from routes.auth_route import auth_route
+from src.routes.auth_route import auth_route
+from src.routes.user_route import user_route
 
 
 def init_app(app):

@@ -5,7 +5,9 @@ SECRET_KEY = "jadkfbsdkjbfbh"
 PASSWORD_SCHEMES = ['pbkdf2_sha512', 'md5_crypt']
 EXTENSIONS = [
     # "src.extensions.database:init_app",
-    "src.extensions.blueprints:init_app"
+    "src.extensions.blueprints:init_app",
+    "src.extensions.database:init_app",
+    "src.extensions.commands:init_app"
 ]
 
 
