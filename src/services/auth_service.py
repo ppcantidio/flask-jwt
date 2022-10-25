@@ -2,7 +2,9 @@ import datetime
 
 import jwt
 from dynaconf import settings
+from flask import jsonify
 from src.database.user_db import UserDB
+from werkzeug.security import check_password_hash
 
 
 class AuthService:
@@ -17,6 +19,9 @@ class AuthService:
         if not user:
             return {"message": "user not found"}
 
-        time_exp = datetime.datetime.now() + datetime.timedelta(hours=12)
-        token = jwt.encode({"username": user.username, "exp": time_exp}, settings.get("SECRET_KEY"))
-        return {"message": "Validated sucessfully", "token": token.decode("UTF=8"), "exp": time_exp}
+        if check_password_hash(user.password, password):
+            time_exp = datetime.datetime.now() + datetime.timedelta(hours=12)
+            token = jwt.encode({"username": user.username, "exp": time_exp}, settings.get("SECRET_KEY"))
+            return {"message": "Validated sucessfully", "token": token.decode("UTF=8"), "exp": time_exp}
+
+        return {"message": "Could not verify"}
