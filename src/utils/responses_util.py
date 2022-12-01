@@ -6,5 +6,5 @@ def res_data_invalid(error):
     return response
 
 
-def res_sucess(data):
-    return jsonify({"message": "sucess", "data": data})
+def res_sucess(resource, message, data=[]):
+    return jsonify({"status": "sucess", "message": message, "data": data})

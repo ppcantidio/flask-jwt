@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from marshmallow import ValidationError
+
 from src.database.models import User as UserTable
-from src.schemas.user_schema import UserCreateSchema, UserOutSchema
+from src.schemas.user_schema import UserCreateSchema, UserEditSchema, UserOutSchema
 from src.services.user_service import UserService
 from src.utils.auth_util import token_required
 from src.utils.responses_util import res_data_invalid, res_sucess
@@ -22,7 +23,7 @@ class UserRoute:
         user_object = UserTable(**user_request)
         UserService().create_user(user_object)
 
-        return jsonify({"message": "user created with sucess"})
+        return res_sucess(resource="user", message="user created with sucess")
 
     @user_route.route("/<id>", methods=["GET"])
     @token_required
@@ -31,13 +32,18 @@ class UserRoute:
 
         user = UserOutSchema().dump(user)
 
-        return jsonify({"message": "user retrieved with sucess", "data": user})
+        return res_sucess(resource="user", message="user retrieved with sucess", data=user)
 
     @user_route.route("/", methods=["PUT"])
     @token_required
     def edit_user(current_user):
-        payload = request.json
+        req_data = request.json
 
-        user = UserService().edit_user(payload)
+        try:
+            user_request = UserEditSchema().load(req_data)
+        except ValidationError as err:
+            return res_data_invalid(err)
 
-        return jsonify({"user": user})
+        user = UserService().edit_user(user_request)
+
+        return res_sucess(resource="user", message="user edited with sucess", data=user)

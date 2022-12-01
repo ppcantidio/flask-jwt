@@ -15,3 +15,7 @@ class UserCreateSchema(BaseUser):
 
 class UserOutSchema(BaseUser):
     id = fields.Int()
+
+
+class UserEditSchema(BaseUser):
+    pass

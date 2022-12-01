@@ -18,5 +18,9 @@ class UserService:
         user = UserDB().get_user_by_id(user_id)
         return user
 
-    def edit_user(self, payload):
-        pass
+    def edit_user(self, current_user, payload):
+        for key, value in payload.items():
+            current_user.key = value
+
+        user = UserDB().update_user(current_user)
+        return user

@@ -1,21 +1,16 @@
+from src.database.abstract_db import AbstractDB
 from src.database.models import User as UserTable
 from src.extensions.database import db
 
 
-class UserDB:
-    def get_user_by_username(self, username: str):
-        user = UserTable.query.filter(UserTable.username == username).first()
-        return user
+class UserDB(AbstractDB):
+    def __init__(self):
+        self.table = UserTable
 
-    def get_user_by_id(self, user_id: str):
-        user = db.session.query(UserTable).get(user_id)
+    def get_user_by_username(self, username: str):
+        user = self.table.query.filter(self.table.username == username).first()
         return user
 
     def get_user_by_email(self, email):
-        user = UserTable.query.filter(UserTable.email == email).first()
+        user = self.table.query.filter(self.table.email == email).first()
         return user
-
-    def register_user(self, user_object: object):
-        db.session.add(user_object)
-        db.session.commit()
-        db.session.refresh(user_object)
